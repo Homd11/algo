@@ -55,7 +55,14 @@ const EDGES=[
 {from:"F1",to:"2",dist:9.2,cap:3200,cond:8},
 {from:"F2",to:"3",dist:2.5,cap:2000,cond:7},
 {from:"F7",to:"15",dist:8.3,cap:2800,cond:8},
-{from:"F8",to:"4",dist:6.1,cap:3000,cond:9}
+{from:"F8",to:"4",dist:6.1,cap:3000,cond:9},
+{from:"3",to:"F4",dist:2.5,cap:2000,cond:7},
+{from:"3",to:"F5",dist:1.5,cap:1800,cond:9},
+{from:"3",to:"F9",dist:1.5,cap:2000,cond:7},
+{from:"5",to:"F6",dist:3.0,cap:2800,cond:8},
+{from:"8",to:"F3",dist:4.0,cap:2500,cond:7},
+{from:"10",to:"F3",dist:0.5,cap:1500,cond:8},
+{from:"1",to:"F10",dist:1.0,cap:1800,cond:8}
 ];
 
 const TRAFFIC_FLOW=[
@@ -86,7 +93,14 @@ const TRAFFIC_FLOW=[
 {road:"F1-2",morning:3000,afternoon:2000,evening:2800,night:1100},
 {road:"F2-3",morning:1900,afternoon:1600,evening:1800,night:900},
 {road:"F7-15",morning:2600,afternoon:1500,evening:2400,night:550},
-{road:"F8-4",morning:2800,afternoon:1600,evening:2600,night:600}
+{road:"F8-4",morning:2800,afternoon:1600,evening:2600,night:600},
+{road:"3-F4",morning:2200,afternoon:1400,evening:2000,night:600},
+{road:"3-F5",morning:2000,afternoon:1300,evening:1800,night:500},
+{road:"3-F9",morning:2100,afternoon:1400,evening:1900,night:550},
+{road:"5-F6",morning:2500,afternoon:1500,evening:2300,night:700},
+{road:"8-F3",morning:1800,afternoon:1100,evening:1600,night:400},
+{road:"10-F3",morning:1500,afternoon:1000,evening:1400,night:350},
+{road:"1-F10",morning:1700,afternoon:1200,evening:1600,night:450}
 ];
 
 const TIME_LABELS=["Morning Peak","Afternoon","Evening Peak","Night"];

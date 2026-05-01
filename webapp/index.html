@@ -3,74 +3,84 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Cairo Transportation Optimizer — Interactive shortest-path algorithm visualizer with ML-based traffic prediction. CSE112 Design & Analysis of Algorithms.">
-  <title>Cairo Transport Optimizer | CSE112</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Pathfinding Algorithm Visualizer \u2014 Compare Dijkstra, A*, Bellman-Ford, and Floyd-Warshall on an interactive Cairo transportation network.">
+  <title>Pathfinding Visualizer | CSE112</title>
+  <link rel="stylesheet" href="style.css?v=4">
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.17.0/dist/tf.min.js"></script>
 </head>
 <body>
 
-<!-- ── Navbar ── -->
-<nav class="navbar" id="navbar">
+<!-- Navigation -->
+<nav class="navbar">
   <a href="#" class="nav-brand">
-    <span class="logo-icon">🚦</span>
-    Cairo Transport
+    <span class="logo-icon">P</span>
+    <span>Pathfinding Visualizer</span>
   </a>
   <ul class="nav-links">
     <li><a href="#network-section">Network</a></li>
-    <li><a href="#race-section">Algorithm Race</a></li>
-    <li><a href="#ml-section">ML Prediction</a></li>
+    <li><a href="#race-section">Race</a></li>
+    <li><a href="#ml-section">ML</a></li>
     <li><a href="#benchmark-section">Benchmarks</a></li>
   </ul>
-  <div class="nav-actions"></div>
 </nav>
 
-<!-- ── Hero ── -->
+<!-- Hero -->
 <section class="hero" id="hero">
-  <span class="hero-badge">⚡ CSE112 — Design & Analysis of Algorithms</span>
-  <h1>Cairo <span class="gradient-text">Transportation</span><br>Optimizer</h1>
-  <p>Interactive shortest-path algorithm visualizer with ML-powered traffic congestion prediction on Cairo's real transportation network.</p>
-  <div class="hero-buttons">
-    <a href="#race-section" class="btn btn-primary">🏁 Algorithm Race</a>
-    <a href="#ml-section" class="btn btn-secondary">🤖 ML Prediction</a>
-  </div>
-  <div class="hero-stats">
-    <div class="stat"><div class="stat-value">25</div><div class="stat-label">Nodes</div></div>
-    <div class="stat"><div class="stat-value">28</div><div class="stat-label">Roads</div></div>
-    <div class="stat"><div class="stat-value">5</div><div class="stat-label">Algorithms</div></div>
-    <div class="stat"><div class="stat-value">112</div><div class="stat-label">ML Samples</div></div>
+  <div class="hero-content">
+    <span class="hero-badge">CSE112 \u2014 Design & Analysis of Algorithms</span>
+    <h1>Pathfinding <span class="accent">Algorithm</span> Visualizer</h1>
+    <p>Compare shortest-path algorithms side-by-side on Cairo's transportation network. Select algorithms, pick source and target nodes, and watch them race.</p>
+    <div class="hero-buttons">
+      <a href="#race-section" class="btn btn-primary">Start Race</a>
+      <a href="#benchmark-section" class="btn btn-secondary">View Benchmarks</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-value">25</div>
+        <div class="stat-label">Nodes</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">35</div>
+        <div class="stat-label">Edges</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">5</div>
+        <div class="stat-label">Algorithms</div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ── Network Graph ── -->
+<!-- Network Graph -->
 <section class="section" id="network-section">
   <div class="section-header animate-in">
     <div class="section-tag">Network Topology</div>
     <h2>Cairo Transportation Network</h2>
-    <p>15 neighborhoods and 10 key facilities connected by 28 roads, with real geographic coordinates.</p>
+    <p>15 neighborhoods and 10 facilities connected by 28 bidirectional roads.</p>
   </div>
   <div class="graph-container animate-in">
     <div class="graph-canvas-wrap">
       <canvas id="networkCanvas"></canvas>
     </div>
     <div class="graph-legend">
-      <div class="legend-item"><span class="legend-dot" style="background:#6a5fc1"></span> Residential</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#6366f1"></span> Residential</div>
       <div class="legend-item"><span class="legend-dot" style="background:#8b8ba0"></span> Mixed</div>
-      <div class="legend-item"><span class="legend-dot" style="background:#fa7faa"></span> Business</div>
-      <div class="legend-item"><span class="legend-dot" style="background:#ffb287"></span> Industrial/Govt</div>
-      <div class="legend-item"><span class="legend-dot" style="background:#c2ef4e"></span> Facility</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#ec4899"></span> Business</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#f59e0b"></span> Industrial / Govt</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#10b981"></span> Facility</div>
     </div>
   </div>
 </section>
 
-<!-- ── Algorithm Race ── -->
+<!-- Algorithm Race -->
 <section class="section section-alt" id="race-section">
   <div class="section-header animate-in">
     <div class="section-tag">Side-by-Side Comparison</div>
-    <h2>Algorithm Race Visualizer</h2>
-    <p>Watch Dijkstra and A* compete in real-time. See how A*'s heuristic drastically reduces exploration.</p>
+    <h2>Algorithm Race</h2>
+    <p>Select which algorithms to compare, then pick source and target nodes to see them find the shortest path.</p>
   </div>
   <div class="race-container animate-in">
+    <!-- Controls -->
     <div class="race-controls">
       <div class="control-group">
         <label>Source Node</label>
@@ -81,52 +91,36 @@
         <select id="raceTarget"></select>
       </div>
       <div class="control-group">
-        <label>Speed</label>
+        <label>Animation Speed</label>
         <select id="raceSpeed">
-          <option value="500">Slow</option>
-          <option value="200" selected>Normal</option>
-          <option value="80">Fast</option>
-          <option value="20">Instant</option>
+          <option value="200">Slow</option>
+          <option value="80" selected>Normal</option>
+          <option value="20">Fast</option>
+          <option value="0">Instant</option>
         </select>
       </div>
-      <button class="btn-race" id="raceBtn" onclick="startRace()">🏁 Start Race</button>
+      <button class="btn-race" id="raceBtn">Start Race</button>
     </div>
-    <div class="race-grid">
-      <div class="race-panel">
-        <div class="race-panel-header">
-          <h3>Dijkstra's Algorithm</h3>
-          <span class="algo-badge badge-dijkstra">O((V+E) log V)</span>
-        </div>
-        <canvas id="dijkstraCanvas"></canvas>
-        <div class="race-panel-stats">
-          <div class="race-stat"><span class="race-stat-label">Explored</span><span class="race-stat-value" id="dijkstra-explored">0</span></div>
-          <div class="race-stat"><span class="race-stat-label">Relaxations</span><span class="race-stat-value" id="dijkstra-relaxed">0</span></div>
-          <div class="race-stat"><span class="race-stat-label">Path Length</span><span class="race-stat-value" id="dijkstra-dist">—</span></div>
-          <div class="race-stat"><span class="race-stat-label">Status</span><span class="race-stat-value" id="dijkstra-status">Ready</span></div>
-        </div>
-      </div>
-      <div class="race-panel">
-        <div class="race-panel-header">
-          <h3>A* Search</h3>
-          <span class="algo-badge badge-astar">Heuristic-Guided</span>
-        </div>
-        <canvas id="astarCanvas"></canvas>
-        <div class="race-panel-stats">
-          <div class="race-stat"><span class="race-stat-label">Explored</span><span class="race-stat-value" id="astar-explored">0</span></div>
-          <div class="race-stat"><span class="race-stat-label">Relaxations</span><span class="race-stat-value" id="astar-relaxed">0</span></div>
-          <div class="race-stat"><span class="race-stat-label">Path Length</span><span class="race-stat-value" id="astar-dist">—</span></div>
-          <div class="race-stat"><span class="race-stat-label">Status</span><span class="race-stat-value" id="astar-status">Ready</span></div>
-        </div>
-      </div>
+
+    <!-- Algorithm Selection -->
+    <div class="algo-selection" id="algoSelection">
+      <!-- Populated by JS -->
     </div>
+
+    <!-- Race Grid -->
+    <div class="race-grid" id="raceGrid">
+      <!-- Populated by RaceController -->
+    </div>
+
+    <!-- Race Result -->
     <div class="race-result" id="raceResult">
       <div class="race-winner" id="raceWinner"></div>
-      <div class="race-detail" id="raceDetail" style="color:var(--text-secondary);font-size:14px"></div>
+      <div class="race-detail" id="raceDetail"></div>
     </div>
   </div>
 </section>
 
-<!-- ── ML Prediction ── -->
+<!-- ML Prediction -->
 <section class="section" id="ml-section">
   <div class="section-header animate-in">
     <div class="section-tag">Machine Learning</div>
@@ -146,11 +140,11 @@
         </div>
         <button class="btn-race" onclick="predict()" id="predictBtn" disabled>Predict Traffic</button>
         <div class="ml-prediction-box">
-          <div class="ml-prediction-value" id="predictionValue">—</div>
+          <div class="ml-prediction-value" id="predictionValue">\u2014</div>
           <div class="ml-prediction-label">Predicted vehicles/hour</div>
         </div>
         <div class="ml-prediction-box">
-          <div class="ml-prediction-value" id="actualValue" style="font-size:22px">—</div>
+          <div class="ml-prediction-value" id="actualValue" style="font-size:22px">\u2014</div>
           <div class="ml-prediction-label">Actual (from dataset)</div>
         </div>
       </div>
@@ -160,53 +154,83 @@
         </div>
       </div>
     </div>
-    <div class="ml-status" id="mlStatus">⏳ Loading TensorFlow.js model...</div>
+    <div class="ml-status" id="mlStatus">Loading TensorFlow.js model...</div>
   </div>
 </section>
 
-<!-- ── Benchmarks ── -->
+<!-- Benchmarks -->
 <section class="section section-alt" id="benchmark-section">
   <div class="section-header animate-in">
     <div class="section-tag">Performance Analysis</div>
     <h2>Algorithm Benchmarks</h2>
-    <p>Empirical comparison of all implemented algorithms on the Cairo network (median of 1000 runs).</p>
+    <p>Theoretical complexity vs actual performance on the Cairo network.</p>
   </div>
   <div class="benchmark-container animate-in">
-    <div class="card" style="padding:0;overflow:hidden">
+    <div class="card table-card">
       <table class="benchmark-table">
         <thead>
-          <tr><th>Algorithm</th><th>Complexity</th><th>Edge Relaxations</th><th>PQ Extractions</th><th>Best For</th></tr>
+          <tr>
+            <th>Algorithm</th>
+            <th>Complexity</th>
+            <th>Description</th>
+            <th>Best For</th>
+          </tr>
         </thead>
         <tbody>
-          <tr><td>Dijkstra (Array)</td><td><span class="complexity">O(V²)</span></td><td>28</td><td>19</td><td>Dense graphs</td></tr>
-          <tr><td>Dijkstra (Binary Heap)</td><td><span class="complexity">O((V+E) log V)</span></td><td>28</td><td>19</td><td>Sparse graphs (default)</td></tr>
-          <tr><td>A* (Haversine)</td><td><span class="complexity">O((V+E) log V)</span></td><td>10</td><td>3</td><td>Point-to-point queries</td></tr>
-          <tr><td>Bellman-Ford</td><td><span class="complexity">O(V·E)</span></td><td>56</td><td>n/a</td><td>Negative weights</td></tr>
-          <tr><td>Floyd-Warshall</td><td><span class="complexity">O(V³)</span></td><td>—</td><td>—</td><td>All-pairs (small V)</td></tr>
+          <tr>
+            <td>Dijkstra (Array)</td>
+            <td><span class="complexity">O(V²)</span></td>
+            <td>Linear search priority queue</td>
+            <td>Very small graphs</td>
+          </tr>
+          <tr>
+            <td>Dijkstra (Heap)</td>
+            <td><span class="complexity">O((V+E) log V)</span></td>
+            <td>Binary heap priority queue</td>
+            <td>Sparse graphs</td>
+          </tr>
+          <tr>
+            <td>A* Search</td>
+            <td><span class="complexity">O((V+E) log V)</span></td>
+            <td>Haversine heuristic guidance</td>
+            <td>Point-to-point</td>
+          </tr>
+          <tr>
+            <td>Bellman-Ford</td>
+            <td><span class="complexity">O(V·E)</span></td>
+            <td>Dynamic programming relaxation</td>
+            <td>Negative weights</td>
+          </tr>
+          <tr>
+            <td>Floyd-Warshall</td>
+            <td><span class="complexity">O(V³)</span></td>
+            <td>All-pairs distance matrix</td>
+            <td>All-pairs (small V)</td>
+          </tr>
         </tbody>
       </table>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px">
-      <div class="card">
-        <h3 style="font-size:14px;font-weight:700;margin-bottom:16px;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px">Nodes Explored: Downtown → Helwan</h3>
-        <canvas id="benchChart1" height="200"></canvas>
+    <div class="charts-row">
+      <div class="card chart-card">
+        <h3 class="chart-title">Nodes Explored (Downtown \u2192 Helwan)</h3>
+        <canvas id="benchChart1" height="180"></canvas>
       </div>
-      <div class="card">
-        <h3 style="font-size:14px;font-weight:700;margin-bottom:16px;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px">Edge Relaxations Comparison</h3>
-        <canvas id="benchChart2" height="200"></canvas>
+      <div class="card chart-card">
+        <h3 class="chart-title">Edge Relaxations</h3>
+        <canvas id="benchChart2" height="180"></canvas>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── Footer ── -->
+<!-- Footer -->
 <footer class="footer">
-  <p>CSE112 — Design & Analysis of Algorithms | Alamein International University</p>
-  <p style="margin-top:8px">Built with ❤️ using vanilla JS, TensorFlow.js & Canvas API | <a href="https://github.com/Homd11/algo" target="_blank">GitHub</a></p>
+  <p>CSE112 \u2014 Design & Analysis of Algorithms</p>
+  <p>Alamein International University</p>
 </footer>
 
-<script src="data.js"></script>
-<script src="algorithms.js"></script>
-<script src="app.js"></script>
+<script src="data.js?v=4"></script>
+<script src="algorithms.js?v=4"></script>
+<script src="app.js?v=4"></script>
 </body>
 </html>
