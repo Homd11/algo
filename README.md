@@ -13,7 +13,7 @@ An interactive web-based visualization of shortest-path algorithms on Cairo's re
 
 ## 🌐 Live Demo
 
-👉 **[algo-homd11.vercel.app](https://algo-homd11.vercel.app)**
+👉 **[algo-homd11.vercel.app](https://algo-gules.vercel.app/)**
 
 The entire app runs client-side in your browser — no backend needed.
 
